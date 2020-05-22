@@ -27,7 +27,7 @@ def get_utilizaiton_and_memory():
     return GPUs
 
 
-def available_GPUs(util_max=0.01, mem_max=0.15):
+def available_GPUs(util_max=0.01, mem_max=0.25):
     GPUs = get_utilizaiton_and_memory()
     return [i for i, (util, mem) in GPUs.items() if
             util <= util_max and mem <= mem_max]
@@ -60,9 +60,10 @@ def main():
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = ",".join(
         [str(gpu_id) for gpu_id in GPUs[0:args.n_gpus]])
-    print("*** Start running {} on GPU {} ***".format(args.cmd,
+    print("*** Start running \"{}\" on GPU {} ***".format(args.cmd,
             os.environ["CUDA_VISIBLE_DEVICES"]))
-    subprocess.run(args.cmd, check=True, env=os.environ.copy())
+
+    subprocess.run(args.cmd, check=True, env=os.environ.copy(), shell=True)
 
 
 if __name__ == "__main__":
