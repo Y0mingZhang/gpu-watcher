@@ -1,6 +1,6 @@
  gpu-watcher 
 ==============================
-A small tool to wait for available GPU(s) and run your job on them.
+A tool that waits for available GPU(s) and run your job on them.
 ## setup
 The code is tested with Python>=3.6
 ## usage
